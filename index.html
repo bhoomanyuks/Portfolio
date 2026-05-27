@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bhoomanyu Sajeevkumar — Creative Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #f5f0e8;
+  --cream2: #ede7da;
+  --cream3: #e4ddd0;
+  --black: #0f0f0f;
+  --black2: #1a1a1a;
+  --black3: #2a2a2a;
+  --coral: #ff4d3a;
+  --coral2: #ff6b5a;
+  --coral-dim: rgba(255,77,58,0.08);
+  --gray: #888;
+  --gray2: #555;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--black);
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CURSOR */
+.cur { position:fixed; pointer-events:none; z-index:9999; mix-blend-mode:difference; }
+.cur-dot { width:8px; height:8px; background:var(--black); border-radius:50%; transform:translate(-50%,-50%); transition:transform 0.2s; }
+.cur-circle { width:40px; height:40px; border:1.5px solid var(--black); border-radius:50%; transform:translate(-50%,-50%); transition:all 0.35s cubic-bezier(.16,1,.3,1); opacity:0.5; }
+body:hover .cur-dot { transform:translate(-50%,-50%) scale(1); }
+
+/* NAV */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  padding: 28px 64px;
+  display: flex; justify-content:space-between; align-items:center;
+  mix-blend-mode: multiply;
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 18px;
+  letter-spacing: -0.02em;
+  color: var(--black);
+}
+.nav-logo span { color: var(--coral); }
+.nav-links { display:flex; gap:36px; list-style:none; }
+.nav-links a {
+  color: var(--gray2); text-decoration:none;
+  font-size: 13px; letter-spacing: 0.08em;
+  text-transform: uppercase; font-weight: 500;
+  transition: color 0.25s;
+}
+.nav-links a:hover { color: var(--coral); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  padding: 0 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  right: -100px; bottom: -100px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,77,58,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-left { position: relative; z-index:2; }
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--coral); font-weight: 500; margin-bottom: 28px;
+  opacity: 0; animation: fadeUp 0.7s 0.1s forwards;
+}
+.hero-eyebrow::before {
+  content:''; width:28px; height:1.5px; background:var(--coral);
+}
+
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(56px, 7vw, 96px);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+  opacity: 0; animation: fadeUp 0.7s 0.25s forwards;
+}
+.hero-name em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--gray2);
+}
+
+.hero-desc {
+  font-size: 16px; line-height: 1.8;
+  color: var(--gray2); max-width: 420px;
+  margin-bottom: 44px; font-weight: 300;
+  opacity: 0; animation: fadeUp 0.7s 0.4s forwards;
+}
+.hero-desc b { color: var(--black); font-weight: 600; }
+
+.hero-cta {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.7s 0.55s forwards;
+}
+
+.btn-primary {
+  padding: 15px 36px;
+  background: var(--black);
+  color: var(--cream);
+  text-decoration: none;
+  font-size: 13px; letter-spacing: 0.1em;
+  text-transform: uppercase; font-weight: 500;
+  transition: all 0.3s;
+  position: relative; overflow: hidden;
+}
+.btn-primary::after {
+  content:''; position:absolute; inset:0;
+  background: var(--coral);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(.16,1,.3,1);
+}
+.btn-primary:hover::after { transform: translateX(0); }
+.btn-primary span { position:relative; z-index:1; }
+
+.btn-ghost {
+  padding: 15px 36px;
+  border: 1.5px solid var(--black3);
+  color: var(--black);
+  text-decoration: none;
+  font-size: 13px; letter-spacing: 0.1em;
+  text-transform: uppercase; font-weight: 500;
+  transition: all 0.3s;
+}
+.btn-ghost:hover { border-color: var(--coral); color: var(--coral); }
+
+.hero-right {
+  position: relative; z-index:2;
+  opacity: 0; animation: fadeIn 1s 0.6s forwards;
+}
+
+.hero-card {
+  background: var(--black);
+  padding: 48px;
+  position: relative;
+}
+.hero-card::before {
+  content:'';
+  position: absolute;
+  top: 12px; right: -12px;
+  width: 100%; height: 100%;
+  border: 1.5px solid var(--coral);
+  z-index: -1;
+}
+
+.hero-card-label {
+  font-size: 11px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--coral);
+  margin-bottom: 20px;
+}
+
+.hero-card-big {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 72px; font-weight: 700;
+  color: var(--cream); line-height: 1;
+  margin-bottom: 8px;
+}
+
+.hero-card-sub {
+  font-size: 13px; color: var(--gray);
+  letter-spacing: 0.05em; margin-bottom: 32px;
+}
+
+.hero-tools {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+
+.tool-tag {
+  padding: 6px 14px;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.6);
+  font-size: 11px; letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* SECTIONS */
+section { padding: 110px 64px; }
+
+.s-label {
+  display: inline-flex; align-items:center; gap:10px;
+  font-size: 11px; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--coral);
+  font-weight: 500; margin-bottom: 20px;
+}
+.s-label::before { content:''; width:20px; height:1.5px; background:var(--coral); }
+
+.s-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 700; line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 64px;
+}
+.s-title em { font-style:italic; font-weight:300; color:var(--gray2); }
+
+/* ABOUT */
+.about { background: var(--black); color: var(--cream); }
+.about .s-title { color: var(--cream); }
+.about .s-title em { color: var(--gray); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 5fr 4fr;
+  gap: 80px; align-items:start;
+}
+
+.about-body p {
+  font-size: 16px; line-height: 1.9;
+  color: rgba(245,240,232,0.65);
+  font-weight: 300; margin-bottom: 20px;
+}
+.about-body p b { color: var(--cream); font-weight: 500; }
+
+.about-skills-title {
+  font-size: 11px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--coral);
+  margin-bottom: 20px;
+}
+
+.skill-row {
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  display: flex; justify-content: space-between; align-items:center;
+}
+.skill-row:first-of-type { border-top: 1px solid rgba(255,255,255,0.07); }
+.skill-name { font-size:14px; color:var(--cream); font-weight:400; }
+.skill-level {
+  display:flex; gap:4px;
+}
+.skill-dot {
+  width:7px; height:7px; border-radius:50%;
+  background: rgba(255,255,255,0.15);
+}
+.skill-dot.on { background: var(--coral); }
+
+/* DESIGN WORK */
+.design { background: var(--cream); }
+
+.design-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto;
+  gap: 20px;
+}
+
+.d-item {
+  background: var(--cream2);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.4s cubic-bezier(.16,1,.3,1);
+}
+.d-item:hover { transform: translateY(-6px); }
+.d-item:hover .d-overlay { opacity: 1; }
+.d-overlay { pointer-events: none; }
+
+.d-item-a { grid-column: span 7; }
+.d-item-b { grid-column: span 5; }
+.d-item-c { grid-column: span 4; }
+.d-item-d { grid-column: span 4; }
+.d-item-e { grid-column: span 4; }
+
+.d-img {
+  width:100%; aspect-ratio:4/3;
+  background: var(--cream3);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  position:relative; overflow:hidden;
+}
+.d-item-a .d-img { aspect-ratio: 16/9; }
+.d-item img { width:100%; height:320px; object-fit:cover; display:block; }
+.d-item-a img { height:400px; }
+
+.d-grid-pattern {
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(15,15,15,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,15,15,0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.d-img-icon { font-size:40px; opacity:0.2; position:relative; z-index:1; margin-bottom:8px; }
+.d-img-hint {
+  font-size:11px; letter-spacing:0.15em;
+  text-transform:uppercase; color:var(--gray);
+  position:relative; z-index:1;
+}
+.d-img-size {
+  font-size:10px; color:var(--gray);
+  margin-top:4px; position:relative; z-index:1;
+}
+
+.d-overlay {
+  position:absolute; inset:0;
+  background: rgba(255,77,58,0.88);
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; transition:opacity 0.3s;
+  color: white; font-size:13px;
+  letter-spacing:0.1em; text-transform:uppercase;
+  font-weight:500;
+}
+
+.d-info { padding: 20px 20px 24px; }
+.d-cat {
+  font-size:10px; letter-spacing:0.2em;
+  text-transform:uppercase; color:var(--coral);
+  margin-bottom:6px;
+}
+.d-title {
+  font-family:'Cormorant Garamond', serif;
+  font-size:22px; font-weight:600;
+  letter-spacing:-0.01em; margin-bottom:4px;
+}
+.d-desc { font-size:13px; color:var(--gray2); line-height:1.6; }
+
+/* HOW TO ADD */
+.how-to {
+  margin-top: 40px;
+  padding: 28px 32px;
+  background: var(--cream2);
+  border-left: 3px solid var(--coral);
+  display:flex; gap:16px; align-items:flex-start;
+}
+.how-to-icon { font-size:22px; flex-shrink:0; margin-top:2px; }
+.how-to h4 { font-size:14px; font-weight:600; color:var(--coral); margin-bottom:8px; }
+.how-to p { font-size:13px; color:var(--gray2); line-height:1.75; }
+.how-to code {
+  font-size:11px; background:var(--black);
+  color:#ff8c7a; padding:2px 7px; border-radius:3px;
+}
+
+/* VIDEO */
+.video-s { background: var(--cream2); }
+
+.video-grid {
+  display:grid; grid-template-columns: repeat(2,1fr); gap:24px;
+}
+
+.v-item {
+  background: var(--cream); overflow:hidden;
+  transition: transform 0.4s cubic-bezier(.16,1,.3,1);
+  border: 1.5px solid transparent;
+}
+.v-item:hover { transform: translateY(-6px); border-color: var(--coral); }
+
+.v-thumb {
+  width:100%;
+  aspect-ratio:16/9;
+  background: var(--black2);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.video-link{
+  display:block;
+  text-decoration:none;
+  position:relative;
+}
+
+.v-play{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  background:rgba(0,0,0,0.55);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+}
+
+.v-lines {
+  position:absolute; inset:0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 3px,
+    rgba(255,255,255,0.02) 3px, rgba(255,255,255,0.02) 4px
+  );
+}
+
+.v-play {
+  width:56px; height:56px;
+  border:2px solid rgba(255,255,255,0.3);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  color:rgba(255,255,255,0.5); font-size:20px;
+  position:relative; z-index:1; margin-bottom:12px;
+  transition: all 0.3s;
+}
+.v-item:hover .v-play {
+  border-color: var(--coral);
+  color: var(--coral);
+  transform: scale(1.1);
+}
+
+.v-thumb-label {
+  font-size:10px; letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.25);
+  position:relative; z-index:1;
+}
+
+.v-info { padding:20px 20px 24px; }
+.v-cat {
+  font-size:10px; letter-spacing:0.2em;
+  text-transform:uppercase; color:var(--coral); margin-bottom:6px;
+}
+.v-title {
+  font-family:'Cormorant Garamond', serif;
+  font-size:22px; font-weight:600; margin-bottom:4px;
+}
+.v-desc { font-size:13px; color:var(--gray2); line-height:1.6; }
+
+/* CONTACT */
+.contact { background: var(--black); color:var(--cream); text-align:center; }
+.contact .s-label { justify-content:center; }
+.contact .s-label::before { display:none; }
+.contact .s-title { color:var(--cream); }
+.contact .s-title em { color:var(--gray); }
+
+.contact-email {
+  display:inline-block;
+  font-family:'Cormorant Garamond', serif;
+  font-size: clamp(24px, 4vw, 52px);
+  font-weight:600; color:var(--cream);
+  text-decoration:none; letter-spacing:-0.01em;
+  margin-bottom:16px;
+  position:relative;
+}
+.contact-email::after {
+  content:'';
+  position:absolute;
+  bottom:0; left:0; right:0; height:2px;
+  background:var(--coral);
+  transform:scaleX(0);
+  transition:transform 0.4s cubic-bezier(.16,1,.3,1);
+  transform-origin:left;
+}
+.contact-email:hover::after { transform:scaleX(1); }
+.contact-email:hover { color:var(--coral); }
+
+.contact-sub {
+  font-size:14px; color:var(--gray);
+  margin-bottom:52px; font-weight:300;
+}
+
+.contact-row {
+  display:flex; gap:16px;
+  justify-content:center; flex-wrap:wrap;
+}
+
+.c-link {
+  padding:14px 32px;
+  border:1.5px solid rgba(255,255,255,0.15);
+  color:rgba(255,255,255,0.5);
+  text-decoration:none; font-size:12px;
+  letter-spacing:0.12em; text-transform:uppercase;
+  transition:all 0.3s;
+}
+.c-link:hover { border-color:var(--coral); color:var(--coral); }
+
+/* FOOTER */
+footer {
+  background:var(--black);
+  padding:28px 64px;
+  border-top:1px solid rgba(255,255,255,0.06);
+  display:flex; justify-content:space-between; align-items:center;
+}
+footer p { font-size:12px; color:var(--gray); }
+footer span { color:var(--coral); }
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(28px); }
+  to { opacity:1; transform:translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity:0; } to { opacity:1; }
+}
+
+.reveal {
+  opacity:0; transform:translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* SCROLLBAR */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.96);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.lightbox.open { display: flex; }
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  user-select: none;
+}
+.lightbox-close {
+  position: fixed;
+  top: 24px; right: 24px;
+  width: 44px; height: 44px;
+  background: rgba(255,255,255,0.1);
+  border: none; color: white;
+  font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  transition: background 0.3s;
+  z-index: 1001; cursor: pointer;
+}
+.lightbox-close:hover { background: var(--coral); }
+.lightbox-prev, .lightbox-next {
+  position: fixed; top: 50%;
+  transform: translateY(-50%);
+  width: 48px; height: 48px;
+  background: rgba(255,255,255,0.1);
+  border: none; color: white; font-size: 24px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  transition: background 0.3s;
+  z-index: 1001; cursor: pointer;
+}
+.lightbox-prev { left: 20px; }
+.lightbox-next { right: 20px; }
+.lightbox-prev:hover, .lightbox-next:hover { background: var(--coral); }
+.lightbox-counter {
+  position: fixed; bottom: 24px;
+  left: 50%; transform: translateX(-50%);
+  font-size: 12px; color: rgba(255,255,255,0.4);
+  letter-spacing: 0.15em;
+}
+::-webkit-scrollbar { width:3px; }
+::-webkit-scrollbar-track { background:var(--cream); }
+::-webkit-scrollbar-thumb { background:var(--coral); }
+
+/* MOBILE */
+@media(max-width:900px){
+  nav { padding:20px 24px; }
+  .nav-links { display:none; }
+  section { padding:70px 24px; }
+  .hero { grid-template-columns:1fr; padding:100px 24px 60px; gap:40px; min-height:auto; }
+  .hero-right { display:none; }
+  .about-grid { grid-template-columns:1fr; gap:48px; }
+  .design-grid { grid-template-columns:1fr; }
+  .d-item-a,.d-item-b,.d-item-c,.d-item-d,.d-item-e { grid-column:span 1; }
+  .video-grid { grid-template-columns:1fr; }
+  footer { flex-direction:column; gap:10px; text-align:center; padding:24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">✕</button>
+  <button class="lightbox-prev" id="lightboxPrev">&#8249;</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <button class="lightbox-next" id="lightboxNext">&#8250;</button>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
+</div>
+
+<div class="cur" id="curDot"><div class="cur-dot"></div></div>
+<div class="cur" id="curCircle"><div class="cur-circle"></div></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">B<span>.</span>S</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#design">Design</a></li>
+    <li><a href="#video">Video</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Available for freelance work</div>
+    <h1 class="hero-name">
+      Bhoomanyu<br>
+      <em>Sajeevkumar</em>
+    </h1>
+    <p class="hero-desc">
+      <b>Graphic Designer & Video Editor</b> based in Thrissur, Kerala.
+      I create posters, brochures, brand visuals and video edits
+      that make people stop and look twice.
+    </p>
+    <div class="hero-cta">
+      <a href="#design" class="btn-primary"><span>See My Work</span></a>
+      <a href="#contact" class="btn-ghost">Get In Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="hero-card-label">// Creative Stack</div>
+      <div class="hero-card-big">4+</div>
+      <div class="hero-card-sub">Tools mastered</div>
+      <div class="hero-tools">
+        <div class="tool-tag">Photoshop</div>
+        <div class="tool-tag">Premiere Pro</div>
+        <div class="tool-tag">After Effects</div>
+        <div class="tool-tag">Illustrator</div>
+        <div class="tool-tag">Davinci Resolve</div>
+        <div class="tool-tag">Blender</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="s-label">About Me</div>
+  <h2 class="s-title">Design is how I<br><em>think out loud</em></h2>
+
+  <div class="about-grid">
+    <div class="about-body reveal">
+      <p>I'm <b>Bhoomanyu Sajeevkumar</b>, a graphic designer and video editor from <b>Thrissur, Kerala</b>. I completed my Professional Diploma in Multimedia Animation at Smart Media College, training in the full Adobe Creative Suite alongside Print & Layout Design tools.</p>
+      <p>My work spans <b>poster design, brochures, coupons, social media creatives</b>, and <b>video editing</b>. I'm drawn to clean, purposeful design — work that communicates clearly without unnecessary noise.</p>
+      <p>Alongside design, I hold a <b>BCom Finance degree</b> — which means I understand business context, not just pixels. I know what a brand is trying to say, and I know how to say it visually.</p>
+    </div>
+
+    <div class="reveal" style="transition-delay:0.2s">
+      <div class="about-skills-title">Skill Levels</div>
+      <div class="skill-row">
+        <span class="skill-name">Adobe Photoshop</span>
+        <div class="skill-level">
+          <div class="skill-dot on"></div><div class="skill-dot on"></div><div class="skill-dot on"></div><div class="skill-dot on"></div><div class="skill-dot"></div>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">Adobe Premiere Pro</span>
+        <div class="skill-level">
+          <div class="skill-dot on"></div><div class="skill-dot on"></div><div class="skill-dot on"></div><div class="skill-dot on"></div><div class="skill-dot"></div>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">After Effects</span>
+        <div class="skill-level">
+          <div class="skill-dot on"></div><div class="skill-dot on"></div><div class="skill-dot on"></div><div class="skill-dot on"></div><div class="skill-dot"></div>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">Print & Layout Design</span>
+        <div class="skill-level">
+          <div class="skill-dot on"></div><div class="skill-dot on"></div><div class="skill-dot on"></div><div class="skill-dot on"></div><div class="skill-dot"></div>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">Davinci Resolve</span>
+        <div class="skill-level">
+          <div class="skill-dot on"></div><div class="skill-dot on"></div><div class="skill-dot on"></div><div class="skill-dot"></div><div class="skill-dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN -->
+<section class="design" id="design">
+  <div class="s-label">Design Work</div>
+  <h2 class="s-title">Graphic Design<br><em>Projects</em></h2>
+
+  <div class="design-grid">
+
+    <div class="d-item d-item-a reveal">
+      <img src="images/poster1.png" style="width:100%;display:block">
+      <div class="d-overlay">View Project →</div>
+      <div class="d-info">
+        <div class="d-cat">Poster Design</div>
+        <div class="d-title">Trip Poster</div>
+        <div class="d-desc">A vibrant travel poster designed to capture the excitement of a trip. Created using Adobe Photoshop.</div>
+      </div>
+    </div>
+
+    <div class="d-item d-item-b reveal" style="transition-delay:0.1s">
+      <img src="images/brochure1.png" style="width:100%;display:block">
+      <div class="d-overlay">View Project →</div>
+      <div class="d-info">
+        <div class="d-cat">Brochure Design</div>
+        <div class="d-title">Management Event Brochure</div>
+        <div class="d-desc">A professional brochure designed for a management event. Clean layout with clear information hierarchy.</div>
+      </div>
+    </div>
+
+    <div class="d-item d-item-c reveal" style="transition-delay:0.15s">
+      <img src="images/coupon1.png" style="width:100%;display:block">
+      <div class="d-overlay">View Project →</div>
+      <div class="d-info">
+        <div class="d-cat">Coupon Design</div>
+        <div class="d-title">Aloki — Coupon Design</div>
+        <div class="d-desc">A promotional coupon designed for Aloki. Focused on clear offer communication and attractive visual appeal.</div>
+      </div>
+    </div>
+
+    <div class="d-item d-item-d reveal" style="transition-delay:0.2s">
+      <img src="images/social1.png" style="width:100%;display:block">
+      <div class="d-overlay">View Project →</div>
+      <div class="d-info">
+        <div class="d-cat">Social Media Design</div>
+        <div class="d-title">Instagram Shorts Thumbnail</div>
+        <div class="d-desc">A bold eye-catching thumbnail designed for Instagram Shorts. Optimised for maximum scroll-stopping impact.</div>
+      </div>
+    </div>
+
+    <div class="d-item d-item-e reveal" style="transition-delay:0.25s">
+      <img src="images/design1.png" style="width:100%;display:block">
+      <div class="d-overlay">View Project →</div>
+      <div class="d-info">
+        <div class="d-cat">Poster Design</div>
+        <div class="d-title">Event Coming Soon Poster</div>
+        <div class="d-desc">A teaser poster designed to build anticipation for an upcoming event. Bold typography with strong visual impact.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="text-align:center;margin-top:48px;">
+      <a href="projects.html" class="btn-primary" style="display:inline-block;padding:16px 48px;background:var(--coral);color:white;text-decoration:none;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;transition:all 0.3s;">
+        <span>View All Projects →</span>
+      </a>
+    </div>
+
+    <div class="how-to reveal" style="display:none">
+    <div class="how-to-icon">💡</div>
+    <div>
+      <h4>How to Add Your Design Images</h4>
+      <p>Open this file in VS Code. Find <code>&lt;div class="d-img"&gt;</code> and replace it with <code>&lt;img src="your-image.jpg" style="width:100%;display:block"&gt;</code>. Keep your image files in the same folder as this HTML file. I'll guide you through every step — just ask.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="video-s" id="video">
+  <div class="s-label">Video Work</div>
+  <h2 class="s-title reveal">Video Editing<br><em>Projects</em></h2>
+
+  <div class="video-grid">
+    <div class="v-item reveal">
+      <a href="https://www.youtube.com/watch?v=02aaPEsAocU" target="_blank" class="video-link">
+        <div class="v-thumb">
+    
+         <img src="https://img.youtube.com/vi/02aaPEsAocU/maxresdefault.jpg"
+              style="width:100%;height:100%;object-fit:cover;display:block;">
+         <div class="v-play">▶</div>
+
+        </div>
+      </a>
+      <div class="v-info">
+        <div class="v-cat">Cinematic Video</div>
+        <div class="v-title">Management Event — Coming Soon</div>
+        <div class="v-desc">A cinematic coming soon video for a college management event. Built to create anticipation with dramatic visuals and motion.</div>
+      </div>
+    </div>
+
+    <div class="v-item reveal" style="transition-delay:0.1s">
+      <a href="https://www.youtube.com/watch?v=n07JT5aYWpY" target="_blank" class="video-link">
+        <div class="v-thumb">
+    
+         <img src="https://img.youtube.com/vi/n07JT5aYWpY/maxresdefault.jpg"
+              style="width:100%;height:100%;object-fit:cover;display:block;">
+         <div class="v-play">▶</div>
+         
+        </div>
+      </a>
+      <div class="v-info">
+        <div class="v-cat">VFX Breakdown</div>
+        <div class="v-title">VFX Breakdown — Management Event</div>
+        <div class="v-desc">A behind-the-scenes VFX breakdown showing the visual effects process and techniques used in the management event video.</div>
+      </div>
+    </div>
+
+    <div class="v-item reveal" style="transition-delay:0.15s">
+      <a href="https://www.youtube.com/watch?v=BW-OwCgjRzU" target="_blank" class="video-link">
+        <div class="v-thumb">
+    
+         <img src="https://img.youtube.com/vi/BW-OwCgjRzU/maxresdefault.jpg"
+              style="width:100%;height:100%;object-fit:cover;display:block;">
+         <div class="v-play">▶</div>
+         
+        </div>
+      </a>
+      <div class="v-info">
+        <div class="v-cat">Motion Graphics</div>
+        <div class="v-title">Stranger Things Inspired End Card</div>
+        <div class="v-desc">A creative end card inspired by the visual style of Stranger Things. Dark, dramatic and atmospheric motion graphics.</div>
+      </div>
+    </div>
+
+    <div class="v-item reveal" style="transition-delay:0.2s">
+      <a href="https://www.youtube.com/watch?v=r7Z8uK07sZM" target="_blank" class="video-link">
+        <div class="v-thumb">
+    
+         <img src="https://img.youtube.com/vi/r7Z8uK07sZM/maxresdefault.jpg"
+              style="width:100%;height:100%;object-fit:cover;display:block;">
+         <div class="v-play">▶</div>
+         
+        </div>
+      </a>
+      <div class="v-info">
+        <div class="v-cat">Reel / Short</div>
+        <div class="v-title">Fast Cut Motion Graphic Reel</div>
+        <div class="v-desc">A high-energy reel using fast cut editing and motion graphics designed to maximise audience engagement.</div>
+      </div>
+    </div>
+
+    <div class="v-item reveal" style="transition-delay:0.25s">
+      <a href="https://www.youtube.com/watch?v=Ti1D7gKdikM" target="_blank" class="video-link">
+        <div class="v-thumb">
+    
+         <img src="https://img.youtube.com/vi/Ti1D7gKdikM/maxresdefault.jpg"
+              style="width:100%;height:100%;object-fit:cover;display:block;">
+         <div class="v-play">▶</div>
+         
+        </div>
+      </a>
+      <div class="v-info">
+        <div class="v-cat">Motion Graphics</div>
+        <div class="v-title">Thattathin Marayathu — Motion Graphic</div>
+        <div class="v-desc">A motion graphic video inspired by the classic Malayalam film Thattathin Marayathu, blending cinematic storytelling with visual effects.</div>
+      </div>
+    </div>
+
+    <div class="v-item reveal" style="transition-delay:0.3s">
+      <a href="https://www.youtube.com/watch?v=OPPegALWYVg" target="_blank" class="video-link">
+        <div class="v-thumb">
+    
+         <img src="https://img.youtube.com/vi/OPPegALWYVg/maxresdefault.jpg"
+              style="width:100%;height:100%;object-fit:cover;display:block;">
+         <div class="v-play">▶</div>
+         
+        </div>
+      </a>
+      <div class="v-info">
+        <div class="v-cat">VFX / Stranger Things</div>
+        <div class="v-title">Girl Flying — Stranger Things VFX</div>
+        <div class="v-desc">A creative VFX shot of a girl flying into the air as a Stranger Things portal appears in the sky.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="s-label">Contact</div>
+  <h2 class="s-title reveal">Let's create<br><em>something great</em></h2>
+
+  <a href="mailto:bhoomanyusajeevkumar@gmail.com" class="contact-email reveal">
+    bhoomanyusajeevkumar@gmail.com
+  </a>
+  <p class="contact-sub reveal">Based in Thrissur, Kerala — open to freelance & full-time work</p>
+
+  <div class="contact-row reveal">
+    <a href="https://www.linkedin.com/in/bhoomanyu-sajeevkumar" class="c-link" target="_blank">LinkedIn</a>
+    <a href="mailto:bhoomanyusajeevkumar@gmail.com" class="c-link">Gmail</a>
+    <a href="tel:+917012844918" class="c-link">+91 70128 44918</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <span>Bhoomanyu Sajeevkumar</span>. All rights reserved.</p>
+  <p>Thrissur, Kerala — <span>Open to Work</span></p>
+</footer>
+
+<script>
+// Cursor
+const dot = document.querySelector('#curDot .cur-dot');
+const circle = document.querySelector('#curCircle .cur-circle');
+let mx=0,my=0,cx=0,cy=0;
+document.addEventListener('mousemove', e => {
+  mx=e.clientX; my=e.clientY;
+  dot.parentElement.style.left = mx+'px';
+  dot.parentElement.style.top = my+'px';
+});
+(function anim(){
+  cx+=(mx-cx)*0.1; cy+=(my-cy)*0.1;
+  circle.parentElement.style.left=cx+'px';
+  circle.parentElement.style.top=cy+'px';
+  requestAnimationFrame(anim);
+})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    dot.style.transform='translate(-50%,-50%) scale(3)';
+    circle.style.transform='translate(-50%,-50%) scale(0.5)';
+    circle.style.opacity='0';
+  });
+  el.addEventListener('mouseleave',()=>{
+    dot.style.transform='translate(-50%,-50%) scale(1)';
+    circle.style.transform='translate(-50%,-50%) scale(1)';
+    circle.style.opacity='0.5';
+  });
+});
+
+// Lightbox
+let lightboxImages = [];
+let currentIndex = 0;
+
+function collectImages(){
+  lightboxImages = [];
+  const imgs = document.querySelectorAll('.d-item img');
+  imgs.forEach((img, i) => {
+    lightboxImages.push(img.src);
+  });
+  document.querySelectorAll('.d-item').forEach((item, i) => {
+    item.style.cursor = 'pointer';
+    item.addEventListener('click', () => openLightbox(i));
+    item.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      openLightbox(i);
+    }, {passive: false});
+  });
+}
+
+function openLightbox(index){
+  currentIndex = index;
+  document.getElementById('lightboxImg').src = lightboxImages[currentIndex];
+  document.getElementById('lightbox').classList.add('open');
+  updateCounter();
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function prevImage(){
+  currentIndex = (currentIndex - 1 + lightboxImages.length) % lightboxImages.length;
+  document.getElementById('lightboxImg').src = lightboxImages[currentIndex];
+  updateCounter();
+}
+
+function nextImage(){
+  currentIndex = (currentIndex + 1) % lightboxImages.length;
+  document.getElementById('lightboxImg').src = lightboxImages[currentIndex];
+  updateCounter();
+}
+
+function updateCounter(){
+  document.getElementById('lightboxCounter').textContent = (currentIndex + 1) + ' / ' + lightboxImages.length;
+}
+
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+document.getElementById('lightboxPrev').addEventListener('click', prevImage);
+document.getElementById('lightboxNext').addEventListener('click', nextImage);
+document.getElementById('lightbox').addEventListener('click', (e) => {
+  if(e.target === e.currentTarget) closeLightbox();
+});
+
+document.addEventListener('keydown', (e) => {
+  if(!document.getElementById('lightbox').classList.contains('open')) return;
+  if(e.key === 'Escape') closeLightbox();
+  if(e.key === 'ArrowLeft') prevImage();
+  if(e.key === 'ArrowRight') nextImage();
+});
+
+let touchStartX = 0;
+document.getElementById('lightbox').addEventListener('touchstart', (e) => {
+  touchStartX = e.touches[0].clientX;
+}, {passive: true});
+document.getElementById('lightbox').addEventListener('touchend', (e) => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if(Math.abs(diff) > 50){ if(diff > 0) nextImage(); else prevImage(); }
+  else if(Math.abs(diff) < 10){ closeLightbox(); }
+}, {passive: true});
+
+collectImages();
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+</script>
+</body>
+</html>

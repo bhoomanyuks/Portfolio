@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Projects — Bhoomanyu Sajeevkumar</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #f5f0e8;
+  --cream2: #ede7da;
+  --cream3: #e4ddd0;
+  --black: #0f0f0f;
+  --black2: #1a1a1a;
+  --black3: #2a2a2a;
+  --coral: #ff4d3a;
+  --coral2: #ff6b5a;
+  --coral-dim: rgba(255,77,58,0.08);
+  --gray: #888;
+  --gray2: #555;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--black);
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CURSOR */
+.cur { position:fixed; pointer-events:none; z-index:9999; mix-blend-mode:difference; }
+.cur-dot { width:8px; height:8px; background:var(--black); border-radius:50%; transform:translate(-50%,-50%); transition:transform 0.2s; }
+.cur-circle { width:40px; height:40px; border:1.5px solid var(--black); border-radius:50%; transform:translate(-50%,-50%); transition:all 0.35s cubic-bezier(.16,1,.3,1); opacity:0.5; }
+
+/* NAV */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  padding: 28px 64px;
+  display: flex; justify-content:space-between; align-items:center;
+  background: rgba(245,240,232,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(15,15,15,0.06);
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 18px;
+  letter-spacing: -0.02em;
+  color: var(--black);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--coral); }
+.nav-links { display:flex; gap:36px; list-style:none; align-items:center; }
+.nav-links a {
+  color: var(--gray2); text-decoration:none;
+  font-size: 13px; letter-spacing: 0.08em;
+  text-transform: uppercase; font-weight: 500;
+  transition: color 0.25s;
+}
+.nav-links a:hover { color: var(--coral); }
+.nav-back {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 24px;
+  background: var(--black);
+  color: var(--cream) !important;
+  font-size: 12px !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500 !important;
+  text-decoration: none;
+  transition: background 0.3s !important;
+}
+.nav-back:hover { background: var(--coral) !important; color: white !important; }
+
+/* HERO */
+.page-hero {
+  padding: 160px 64px 80px;
+  background: var(--black);
+  position: relative;
+  overflow: hidden;
+}
+.page-hero::after {
+  content: 'WORK';
+  position: absolute;
+  right: -20px; bottom: -40px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 220px; font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,77,58,0.08);
+  line-height: 1;
+  pointer-events: none;
+}
+.page-hero-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--coral);
+  font-weight: 500; margin-bottom: 24px;
+  opacity: 0; animation: fadeUp 0.7s 0.1s forwards;
+}
+.page-hero-tag::before { content:''; width:28px; height:1.5px; background:var(--coral); }
+.page-hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(48px, 7vw, 88px);
+  font-weight: 700; line-height: 1.0;
+  color: var(--cream);
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  opacity: 0; animation: fadeUp 0.7s 0.25s forwards;
+}
+.page-hero h1 em { font-style:italic; font-weight:300; color: var(--gray); }
+.page-hero p {
+  font-size: 16px; color: var(--gray);
+  font-weight: 300; max-width: 500px;
+  opacity: 0; animation: fadeUp 0.7s 0.4s forwards;
+}
+.page-hero p span { color: var(--coral); font-weight: 500; }
+
+/* FILTER TABS */
+.filter-bar {
+  padding: 40px 64px 0;
+  display: flex; gap: 12px; flex-wrap: wrap;
+}
+.filter-btn {
+  padding: 10px 24px;
+  border: 1.5px solid rgba(15,15,15,0.15);
+  background: transparent;
+  color: var(--gray2);
+  font-size: 12px; letter-spacing: 0.1em;
+  text-transform: uppercase; font-weight: 500;
+  cursor: none;
+  transition: all 0.3s;
+  font-family: 'Outfit', sans-serif;
+}
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--black);
+  color: var(--cream);
+  border-color: var(--black);
+}
+.filter-btn.active { background: var(--coral); border-color: var(--coral); }
+
+/* PROJECTS GRID */
+.projects-section { padding: 48px 64px 100px; }
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.p-item {
+  background: var(--cream2);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.4s cubic-bezier(.16,1,.3,1);
+}
+.p-item:hover { transform: translateY(-6px); }
+.p-item:hover .p-overlay { opacity: 1; }
+
+.p-img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(.16,1,.3,1);
+}
+.p-item:hover .p-img { transform: scale(1.04); }
+
+.p-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 280px;
+  background: rgba(255,77,58,0.88);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.3s;
+  color: white; font-size: 13px;
+  letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500;
+}
+
+.p-info { padding: 20px 20px 24px; }
+.p-cat {
+  font-size: 10px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--coral);
+  margin-bottom: 6px;
+}
+.p-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 600;
+  letter-spacing: -0.01em; margin-bottom: 4px;
+}
+.p-desc { font-size: 13px; color: var(--gray2); line-height: 1.6; }
+
+/* PLACEHOLDER card */
+.p-placeholder {
+  width: 100%; height: 280px;
+  background: var(--cream3);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.p-placeholder-pattern {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(15,15,15,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,15,15,0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.p-placeholder-icon { font-size: 36px; opacity: 0.2; position: relative; z-index:1; margin-bottom: 8px; }
+.p-placeholder-text { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); position: relative; z-index:1; }
+
+/* COUNT BAR */
+.count-bar {
+  padding: 0 64px 32px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.count-text { font-size: 13px; color: var(--gray); }
+.count-text span { color: var(--coral); font-weight: 600; }
+
+/* FOOTER */
+footer {
+  background: var(--black);
+  padding: 28px 64px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; justify-content: space-between; align-items: center;
+}
+footer p { font-size: 12px; color: var(--gray); }
+footer span { color: var(--coral); }
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(28px); }
+  to { opacity:1; transform:translateY(0); }
+}
+.reveal {
+  opacity:0; transform:translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+::-webkit-scrollbar { width:3px; }
+::-webkit-scrollbar-track { background:var(--cream); }
+::-webkit-scrollbar-thumb { background:var(--coral); }
+
+@media(max-width:900px){
+  nav { padding: 20px 24px; }
+  .nav-links { display: none; }
+  .page-hero { padding: 120px 24px 60px; }
+  .filter-bar { padding: 32px 24px 0; }
+  .projects-section { padding: 32px 24px 80px; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .count-bar { padding: 0 24px 24px; }
+  footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px; }
+}
+
+/* LIGHTBOX */
+.lightbox {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.96);
+  z-index: 1000; display: none;
+  align-items: center; justify-content: center;
+  padding: 20px;
+}
+.lightbox.open { display: flex; }
+.lightbox-img {
+  max-width: 90vw; max-height: 90vh;
+  object-fit: contain; user-select: none;
+}
+.lightbox-close {
+  position: fixed; top: 24px; right: 24px;
+  width: 44px; height: 44px;
+  background: rgba(255,255,255,0.1);
+  border: none; color: white; font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; transition: background 0.3s;
+  z-index: 1001; cursor: pointer;
+}
+.lightbox-close:hover { background: var(--coral); }
+.lightbox-prev, .lightbox-next {
+  position: fixed; top: 50%; transform: translateY(-50%);
+  width: 48px; height: 48px;
+  background: rgba(255,255,255,0.1);
+  border: none; color: white; font-size: 24px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; transition: background 0.3s;
+  z-index: 1001; cursor: pointer;
+}
+.lightbox-prev { left: 20px; }
+.lightbox-next { right: 20px; }
+.lightbox-prev:hover, .lightbox-next:hover { background: var(--coral); }
+.lightbox-counter {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 0.15em;
+}
+.p-overlay { pointer-events: none; }
+
+</style>
+</head>
+<body>
+
+<div class="cur" id="curDot"><div class="cur-dot"></div></div>
+<div class="cur" id="curCircle"><div class="cur-circle"></div></div>
+
+<!-- NAV -->
+<nav>
+  <a href="Bhoomanyu_Portfolio.html" class="nav-logo">B<span>.</span>S</a>
+  <ul class="nav-links">
+    <li><a href="Bhoomanyu_Portfolio.html#about">About</a></li>
+    <li><a href="Bhoomanyu_Portfolio.html#video">Video</a></li>
+    <li><a href="Bhoomanyu_Portfolio.html#contact">Contact</a></li>
+    <li><a href="Bhoomanyu_Portfolio.html" class="nav-back">← Back to Home</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-tag">Design Portfolio</div>
+  <h1>All Graphic Design<br><em>Projects</em></h1>
+  <p>A complete collection of poster designs, brochures, event creatives, and social media work. <span>16 projects</span> and growing.</p>
+</div>
+
+<!-- FILTER -->
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterProjects('all', this)">All Projects</button>
+  <button class="filter-btn" onclick="filterProjects('poster', this)">Posters</button>
+  <button class="filter-btn" onclick="filterProjects('brochure', this)">Brochures</button>
+  <button class="filter-btn" onclick="filterProjects('coupon', this)">Coupons</button>
+  <button class="filter-btn" onclick="filterProjects('social', this)">Social Media</button>
+  <button class="filter-btn" onclick="filterProjects('festival', this)">Festival</button>
+  <button class="filter-btn" onclick="filterProjects('college', this)">College</button>
+</div>
+
+<!-- COUNT -->
+<div class="count-bar">
+  <p class="count-text">Showing <span id="visibleCount">16</span> projects</p>
+</div>
+
+<!-- PROJECTS -->
+<section class="projects-section">
+  <div class="projects-grid" id="projectsGrid">
+
+    <!-- 1 -->
+    <div class="p-item reveal" data-cat="poster college">
+      <img src="images/poster1.png" class="p-img" alt="Trip Poster">
+      <div class="p-overlay">View Project →</div>
+      <div class="p-info">
+        <div class="p-cat">Poster Design</div>
+        <div class="p-title">Trip Poster — Rajasthan</div>
+        <div class="p-desc">A vibrant travel poster designed to capture the excitement of a BCom college trip to Rajasthan.</div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="p-item reveal" data-cat="brochure college" style="transition-delay:0.05s">
+      <img src="images/brochure1.png" class="p-img" alt="Management Event Brochure">
+      <div class="p-overlay">View Project →</div>
+      <div class="p-info">
+        <div class="p-cat">Brochure Design</div>
+        <div class="p-title">Management Event Brochure</div>
+        <div class="p-desc">A professional brochure designed for a college management event. Clean layout with clear information hierarchy.</div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="p-item reveal" data-cat="coupon" style="transition-delay:0.1s">
+      <img src="images/coupon1.png" class="p-img" alt="Aloki Coupon">
+      <div class="p-overlay">View Project →</div>
+      <div class="p-info">
+        <div class="p-cat">Coupon Design</div>
+        <div class="p-title">Aloki — Coupon Design</div>
+        <div class="p-desc">A promotional coupon designed for Aloki. Focused on clear offer communication and attractive visual appeal.</div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="p-item reveal" data-cat="social" style="transition-delay:0.15s">
+      <img src="images/social1.png" class="p-img" alt="Instagram Thumbnail">
+      <div class="p-overlay">View Project →</div>
+      <div class="p-info">
+        <div class="p-cat">Social Media Design</div>
+        <div class="p-title">Instagram Shorts Thumbnail</div>
+        <div class="p-desc">A bold, eye-catching thumbnail designed for Instagram Shorts. Optimised for maximum scroll-stopping impact.</div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="p-item reveal" data-cat="poster college" style="transition-delay:0.2s">
+      <img src="images/design1.png" class="p-img" alt="Coming Soon Poster">
+      <div class="p-overlay">View Project →</div>
+      <div class="p-info">
+        <div class="p-cat">Poster Design</div>
+        <div class="p-title">Aloki — Event Coming Soon</div>
+        <div class="p-desc">A cinematic teaser poster designed for the Aloki Alumni Association event. Bold typography with strong visual impact.</div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="p-item reveal" data-cat="poster college" style="transition-delay:0.05s">
+      <img src="images/poster2.png" class="p-img" alt="Arts Day Poster">
+      <div class="p-overlay">View Project →</div>
+      <div class="p-info">
+        <div class="p-cat">Poster Design</div>
+        <div class="p-title">Arts Day Poster</div>
+        <div class="p-desc">A creative poster designed for the college Arts Day, made for the college union to celebrate student talent and creativity.</div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="p-item reveal" data-cat="poster college" style="transition-delay:0.1s">
+      <img src="images/poster4.png" class="p-img" alt="Aloki Theme Launch">
+      <div class="p-overlay">View Project →</div>
+      <div class="p-info">
+        <div class="p-cat">Poster Design</div>
+        <div class="p-title">Aloki Theme Launch Poster</div>
+        <div class="p-desc">A dramatic theme launch poster for Aloki, inspired by the visual language of Stranger Things. Dark, moody, and cinematic.</div>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="p-item reveal" data-cat="poster festival" style="transition-delay:0.15s">
+      <img src="images/poster8.png" class="p-img" alt="Pooram Festival Poster">
+      <div class="p-overlay">View Project →</div>
+      <div class="p-info">
+        <div class="p-cat">Festival Poster</div>
+        <div class="p-title">Pooram Festival Poster</div>
+        <div class="p-desc">A vibrant and energetic poster designed for the Pooram festival, celebrating the grandeur and spirit of Kerala's iconic temple festival.</div>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="p-item reveal" data-cat="poster college" style="transition-delay:0.2s">
+      <img src="images/poster7.png" class="p-img" alt="Commerce Association Day">
+      <div class="p-overlay">View Project →</div>
+      <div class="p-info">
+        <div class="p-cat">Poster Design</div>
+        <div class="p-title">Commerce Association Day</div>
+        <div class="p-desc">A poster designed for the Commerce Association Day celebration, created for the college union to mark the annual event.</div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="p-item reveal" data-cat="poster college" style="transition-delay:0.05s">
+      <img src="images/poster13.png" class="p-img" alt="Retirement Poster">
+      <div class="p-overlay">View Project →</div>
+      <div class="p-info">
+        <div class="p-cat">Poster Design</div>
+        <div class="p-title">Retirement Farewell Poster</div>
+        <div class="p-desc">A warm and respectful farewell poster designed for a retiring staff member of Sri. C. Achutha Menon Government College.</div>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="p-item reveal" data-cat="brochure college" style="transition-delay:0.1s">
+      <img src="images/schedule1.png" class="p-img" alt="Arts Day Schedule">
+      <div class="p-overlay">View Project →</div>
+      <div class="p-info">
+        <div class="p-cat">Event Schedule Design</div>
+        <div class="p-title">Arts Day Event Schedule</div>
+        <div class="p-desc">A clear and well-structured event schedule brochure designed for the college Arts Day, combining functionality with visual appeal.</div>
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="p-item reveal" data-cat="poster festival" style="transition-delay:0.15s">
+      <img src="images/pooram1.png" class="p-img" alt="Vadakkumnathan Pooram">
+      <div class="p-overlay">View Project →</div>
+      <div class="p-info">
+        <div class="p-cat">Festival Poster</div>
+        <div class="p-title">Vadakkumnathan Desham Poster</div>
+        <div class="p-desc">A simple, minimal poster designed for Vadakkumnathan Desham, capturing the cultural essence of the Pooram celebration with clean visual storytelling.</div>
+      </div>
+    </div>
+
+    <!-- 13 -->
+    <div class="p-item reveal" data-cat="poster festival" style="transition-delay:0.2s">
+      <img src="images/poster5.png" class="p-img" alt="Christmas Poster">
+      <div class="p-overlay">View Project →</div>
+      <div class="p-info">
+        <div class="p-cat">Festival Poster</div>
+        <div class="p-title">Christmas Poster</div>
+        <div class="p-desc">A simple and warm Christmas poster celebrating the festive season with clean design and a joyful visual tone.</div>
+      </div>
+    </div>
+
+    <!-- 14 -->
+    <div class="p-item reveal" data-cat="poster college" style="transition-delay:0.05s">
+      <img src="images/poster6.png" class="p-img" alt="Ethnic Day Poster">
+      <div class="p-overlay">View Project →</div>
+      <div class="p-info">
+        <div class="p-cat">Poster Design</div>
+        <div class="p-title">Ethnic Day Poster</div>
+        <div class="p-desc">A colourful and culturally rich poster designed for the Ethnic Day celebration, created for the college union to showcase cultural diversity.</div>
+      </div>
+    </div>
+
+    <!-- 15 -->
+    <div class="p-item reveal" data-cat="social" style="transition-delay:0.05s">
+      <img src="images/thumb1.png" class="p-img" alt="Instagram Thumbnail">
+      <div class="p-overlay">View Project →</div>
+      <div class="p-info">
+        <div class="p-cat">Social Media Design</div>
+        <div class="p-title">Reels thambnail</div>
+        <div class="p-desc">A minimal attractive thumbnail for reels.</div>
+      </div>
+    </div>
+    <div class="p-item reveal" data-cat="social" style="transition-delay:0.05s">
+      <img src="images/thumb2.png" class="p-img" alt="Instagram Thumbnail">
+      <div class="p-overlay">View Project →</div>
+      <div class="p-info">
+        <div class="p-cat">Social Media Design</div>
+        <div class="p-title">Reels thambnail</div>
+        <div class="p-desc">A scroll-stopping attractive thumbnail for reels.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <span>Bhoomanyu Sajeevkumar</span>. All rights reserved.</p>
+  <p>Thrissur, Kerala — <span>Open to Work</span></p>
+</footer>
+
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">✕</button>
+  <button class="lightbox-prev" id="lightboxPrev">&#8249;</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <button class="lightbox-next" id="lightboxNext">&#8250;</button>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
+</div>
+
+<script>
+// Cursor
+const dot = document.querySelector('#curDot .cur-dot');
+const circle = document.querySelector('#curCircle .cur-circle');
+let mx=0,my=0,cx=0,cy=0;
+document.addEventListener('mousemove', e => {
+  mx=e.clientX; my=e.clientY;
+  dot.parentElement.style.left = mx+'px';
+  dot.parentElement.style.top = my+'px';
+});
+(function anim(){
+  cx+=(mx-cx)*0.1; cy+=(my-cy)*0.1;
+  circle.parentElement.style.left=cx+'px';
+  circle.parentElement.style.top=cy+'px';
+  requestAnimationFrame(anim);
+})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    dot.style.transform='translate(-50%,-50%) scale(3)';
+    circle.style.transform='translate(-50%,-50%) scale(0.5)';
+    circle.style.opacity='0';
+  });
+  el.addEventListener('mouseleave',()=>{
+    dot.style.transform='translate(-50%,-50%) scale(1)';
+    circle.style.transform='translate(-50%,-50%) scale(1)';
+    circle.style.opacity='0.5';
+  });
+});
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+
+// Filter
+function filterProjects(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const items = document.querySelectorAll('.p-item');
+  let count = 0;
+  items.forEach(item => {
+    const cats = item.getAttribute('data-cat') || '';
+    if (cat === 'all' || cats.includes(cat)) {
+      item.style.display = 'block';
+      count++;
+    } else {
+      item.style.display = 'none';
+    }
+  });
+  document.getElementById('visibleCount').textContent = count;
+  setupClicks();
+}
+
+// Lightbox
+let lightboxImages = [];
+let currentIndex = 0;
+
+function getVisibleImages(){
+  // Only collect visible (not filtered out) items
+  const items = document.querySelectorAll('.p-item');
+  const imgs = [];
+  items.forEach(item => {
+    if(item.style.display !== 'none'){
+      const img = item.querySelector('img');
+      if(img) imgs.push(img.src);
+    }
+  });
+  return imgs;
+}
+
+function setupClicks(){
+  document.querySelectorAll('.p-item').forEach((item) => {
+    item.style.cursor = 'pointer';
+    item.onclick = function() {
+      const visibleItems = [...document.querySelectorAll('.p-item')].filter(i => i.style.display !== 'none');
+      const idx = visibleItems.indexOf(item);
+      if(idx !== -1) openLightbox(idx);
+    };
+    item.ontouchend = function(e) {
+      e.preventDefault();
+      const visibleItems = [...document.querySelectorAll('.p-item')].filter(i => i.style.display !== 'none');
+      const idx = visibleItems.indexOf(item);
+      if(idx !== -1) openLightbox(idx);
+    };
+  });
+}
+
+function openLightbox(index){
+  lightboxImages = getVisibleImages();
+  currentIndex = index;
+  if(lightboxImages.length === 0) return;
+  document.getElementById('lightboxImg').src = lightboxImages[currentIndex];
+  document.getElementById('lightbox').classList.add('open');
+  updateCounter();
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function prevImage(){
+  lightboxImages = getVisibleImages();
+  currentIndex = (currentIndex - 1 + lightboxImages.length) % lightboxImages.length;
+  document.getElementById('lightboxImg').src = lightboxImages[currentIndex];
+  updateCounter();
+}
+
+function nextImage(){
+  lightboxImages = getVisibleImages();
+  currentIndex = (currentIndex + 1) % lightboxImages.length;
+  document.getElementById('lightboxImg').src = lightboxImages[currentIndex];
+  updateCounter();
+}
+
+function updateCounter(){
+  document.getElementById('lightboxCounter').textContent = (currentIndex + 1) + ' / ' + lightboxImages.length;
+}
+
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+document.getElementById('lightboxPrev').addEventListener('click', prevImage);
+document.getElementById('lightboxNext').addEventListener('click', nextImage);
+document.getElementById('lightbox').addEventListener('click', (e) => {
+  if(e.target === e.currentTarget) closeLightbox();
+});
+
+document.addEventListener('keydown', (e) => {
+  if(!document.getElementById('lightbox').classList.contains('open')) return;
+  if(e.key === 'Escape') closeLightbox();
+  if(e.key === 'ArrowLeft') prevImage();
+  if(e.key === 'ArrowRight') nextImage();
+});
+
+let touchStartX = 0;
+document.getElementById('lightbox').addEventListener('touchstart', (e) => {
+  touchStartX = e.touches[0].clientX;
+}, {passive: true});
+document.getElementById('lightbox').addEventListener('touchend', (e) => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if(Math.abs(diff) > 50){ if(diff > 0) nextImage(); else prevImage(); }
+  else if(Math.abs(diff) < 10){ closeLightbox(); }
+}, {passive: true});
+
+setupClicks();
+
+</script>
+
+
+</body>
+</html>
