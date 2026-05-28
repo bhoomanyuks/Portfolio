@@ -573,8 +573,7 @@ footer span { color:var(--coral); }
 ::-webkit-scrollbar-thumb { background:var(--coral); }
 
 /* MOBILE */
-.hamburger { display: none; }
-.nav-overlay { display: none; }
+.nav-links { display: none; }
 
 @media(max-width:900px){
   nav { padding:20px 24px; }
@@ -1079,30 +1078,7 @@ const obs = new IntersectionObserver(entries=>{
 },{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
 
- // Hamburger menu
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('navLinks');
-const navOverlay = document.getElementById('navOverlay');
-
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('open');
-  navLinks.classList.toggle('mobile-open');
-  navOverlay.classList.toggle('active');
-});
-
-navOverlay.addEventListener('click', () => {
-  hamburger.classList.remove('open');
-  navLinks.classList.remove('mobile-open');
-  navOverlay.classList.remove('active');
-});
-
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => {
-    hamburger.classList.remove('open');
-    navLinks.classList.remove('mobile-open');
-    navOverlay.classList.remove('active');
-  });
-});
+ 
 
 // Close menu when a nav link is clicked
 document.querySelectorAll('.nav-links a').forEach(link => {
