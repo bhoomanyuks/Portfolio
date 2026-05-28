@@ -1077,6 +1077,32 @@ const obs = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
 },{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+
+  // Hamburger menu
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+const navOverlay = document.getElementById('navOverlay');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  navLinks.classList.toggle('mobile-open');
+  navOverlay.classList.toggle('active');
+  document.body.style.overflow = navLinks.classList.contains('mobile-open') ? 'hidden' : '';
+});
+navOverlay.addEventListener('click', () => {
+  hamburger.classList.remove('open');
+  navLinks.classList.remove('mobile-open');
+  navOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+});
+// Close menu when a nav link is clicked
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('mobile-open');
+    navOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+  });
+});
 </script>
 </body>
 </html>
