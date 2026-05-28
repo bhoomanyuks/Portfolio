@@ -613,12 +613,25 @@ function setupClicks(){
       const idx = visibleItems.indexOf(item);
       if(idx !== -1) openLightbox(idx);
     };
-    item.ontouchend = function(e) {
-      e.preventDefault();
-      const visibleItems = [...document.querySelectorAll('.p-item')].filter(i => i.style.display !== 'none');
-      const idx = visibleItems.indexOf(item);
-      if(idx !== -1) openLightbox(idx);
-    };
+
+    let touchStartY = 0;
+    let touchStartX = 0;
+
+    item.addEventListener('touchstart', function(e) {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    item.addEventListener('touchend', function(e) {
+      const dx = Math.abs(e.changedTouches[0].clientX - touchStartX);
+      const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
+      if (dx < 10 && dy < 10) {
+        // It was a tap, not a scroll — open lightbox
+        const visibleItems = [...document.querySelectorAll('.p-item')].filter(i => i.style.display !== 'none');
+        const idx = visibleItems.indexOf(item);
+        if(idx !== -1) openLightbox(idx);
+      }
+    }, { passive: true });
   });
 }
 
