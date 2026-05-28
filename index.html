@@ -1096,11 +1096,19 @@ navOverlay.addEventListener('click', () => {
 });
 // Close menu when a nav link is clicked
 document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => {
-    hamburger.classList.remove('open');
-    navLinks.classList.remove('mobile-open');
-    navOverlay.classList.remove('active');
-    document.body.style.overflow = '';
+  link.addEventListener('click', (e) => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      e.preventDefault();
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('mobile-open');
+      navOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        const target = document.querySelector(href);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    }
   });
 });
 </script>
