@@ -948,10 +948,23 @@ function collectImages(){
   document.querySelectorAll('.d-item').forEach((item, i) => {
     item.style.cursor = 'pointer';
     item.addEventListener('click', () => openLightbox(i));
-    item.addEventListener('touchend', (e) => {
-      e.preventDefault();
-      openLightbox(i);
-    }, {passive: false});
+
+let touchMoved = false;
+
+item.addEventListener('touchstart', () => {
+  touchMoved = false;
+});
+
+item.addEventListener('touchmove', () => {
+  touchMoved = true;
+});
+
+item.addEventListener('touchend', (e) => {
+  if (!touchMoved) {
+    e.preventDefault();
+    openLightbox(i);
+  }
+}, { passive: false });
   });
 }
 
